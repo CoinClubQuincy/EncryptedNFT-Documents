@@ -4,10 +4,9 @@ import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 
 contract Documents is ERC1155 {
     uint256 public constant Doc = 0;
-    //key remain private in XDC contract and only the holder of the token can get the key to decrypt IMG
     string private EncryptionKEY;
     //launch contract
-    constructor(string memory _EncryptionKEY, string memory IPFS_link) public ERC1155(IPFS_link) {
+    constructor(string memory _EncryptionKEY, string memory URI) public ERC1155(URI) {
         EncryptionKEY = _EncryptionKEY;
         _mint(msg.sender, Doc, 1, "");
     }
