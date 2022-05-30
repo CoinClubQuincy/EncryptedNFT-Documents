@@ -1,6 +1,9 @@
 pragma solidity ^0.8.10;
 // SPDX-License-Identifier: MIT
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+interface Documents_interface{
+    function viewKey() external view returns(string memory);
+} 
 
 contract Documents is ERC1155 {
     uint256 public constant Doc = 0;
