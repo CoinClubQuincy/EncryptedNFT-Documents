@@ -13,6 +13,7 @@ Third Party smart contracts and DApps can use the KYC user auth token as a form 
     https://github.com/QCloud-DevOps/EncryptedNFT-Documents.git
     cd safedun-server
     python3 server.py
+    #Running on http://127.0.0.1:5000
 
 launch [EncryptedNFTs.sol](https://github.com/QCloud-DevOps/EncryptedNFT-Documents/blob/main/contracts/EncryptedNFTs.sol "EncryptedNFTs.sol")
 1. Encryption Key should be a sha256 hash of original the image hash + "randomKey"
