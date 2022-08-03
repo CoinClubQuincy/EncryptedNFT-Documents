@@ -1,8 +1,4 @@
-# # EncryptedNFT-Documents
-
-As a delegated Authority you can have KYC contracts created when users submit a form and generate a contract in the contract will their user data be stored both the user who generated the contract and the original dapp creator will have access tokens to access their data. the user will only be able to view and show proof of their own data while the main application administrator can view all user data and approve all user KYC contracts.
-
-Third Party smart contracts and DApps can use the KYC user auth token as a form of delegated Identification while trusting the  Delegated authority (Bank,Exchange,broker) to provide the correct status of the authenticity of the Identities 
+# # EncryptedNFT-Documents (Private EVM Network)
 
 
 #  launch DApp
