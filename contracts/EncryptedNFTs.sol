@@ -2,24 +2,29 @@ pragma solidity ^0.8.10;
 // SPDX-License-Identifier: MIT
 import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 interface Documents_interface{
-    function viewKey() external view returns(string memory);
+    function viewKeyCommitment() external view returns(bytes32);
+    function verifyKey(bytes32 _keyHash) external view returns(bool);
 } 
 
-contract Documents is ERC1155 {
+/// @title An NFT tied to an encrypted document stored off-chain
+/// @notice The contract never holds the decryption key, because anything in a contract can be
+/// read by anyone. It stores a hash of the key, so a holder who is given the key off-chain can
+/// confirm it is the right one. The token's URI points to the metadata and the encrypted file.
+contract Documents is ERC1155, Documents_interface {
     uint256 public constant Doc = 0;
-    string private EncryptionKEY;
+    bytes32 private keyCommitment;
     //launch contract
-    constructor(string memory _EncryptionKEY, string memory URI) public ERC1155(URI) {
-        EncryptionKEY = _EncryptionKEY;
+    constructor(bytes32 _keyCommitment, string memory URI) ERC1155(URI) {
+        require(_keyCommitment != bytes32(0), "key commitment is required");
+        keyCommitment = _keyCommitment;
         _mint(msg.sender, Doc, 1, "");
     }
-    //only NFT holder can access the functions
-    modifier onlyOwner{
-        require(balanceOf(msg.sender,0) == 1,"You must be holder of the token to view it");
-        _;
+    //anyone can read the commitment, since hiding it would hide nothing
+    function viewKeyCommitment() public view returns(bytes32){
+        return keyCommitment;
     }
-    //view EncryptionKey
-    function viewKey() public view onlyOwner returns(string memory){
-        return EncryptionKEY;
+    //check that a key's hash matches the commitment. Hash the key off-chain, so it is never sent to the chain
+    function verifyKey(bytes32 _keyHash) public view returns(bool){
+        return _keyHash == keyCommitment;
     }
 }

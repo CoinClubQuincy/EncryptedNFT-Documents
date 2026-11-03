@@ -1,0 +1,10 @@
+[profile.default]
+src = "contracts"
+test = "test/foundry"
+out = "out"
+cache_path = "cache_forge"
+libs = ["lib"]
+solc = "0.8.19"
+evm_version = "paris"
+optimizer = true
+remappings = ["@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/", "forge-std/=lib/forge-std/src/"]
