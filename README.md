@@ -75,7 +75,7 @@ Contracts already deployed are unaffected, and **any key they store stays public
 
 | Issue | Effect |
 | --- | --- |
-| Delivering the key is up to you | The contract cannot give anyone the key. You need a private channel or a service that checks the token |
+| Delivering the key is up to you | The contract cannot give anyone the key. You need a private channel or a service that checks the token. That service must first have the holder sign a fresh random challenge, because `balanceOf` alone doesn't prove someone controls the address |
 | Selling the token does not take back the key | A past holder who has the key can still decrypt. Encrypt again with a new key if that matters |
 | A weak key can be guessed from its hash | The hash is public, so use a long random key |
 | Metadata stored off-chain can disappear | If nobody keeps the IPFS file pinned, it can become unavailable |
